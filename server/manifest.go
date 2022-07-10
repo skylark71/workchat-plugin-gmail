@@ -5,19 +5,19 @@ package main
 import (
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v5/model"
+	"gitlab.com/w1572/backend/model"
 )
 
 var manifest *model.Manifest
 
 const manifestStr = `
 {
-  "id": "mattermost-plugin-gmail",
-  "name": "Mattermost Gmail Bot",
-  "description": "Gmail Integration for Mattermost",
-  "homepage_url": "https://github.com/abdulsmapara/mattermost-plugin-gmail/blob/master/README.md",
-  "support_url": "https://github.com/abdulsmapara/mattermost-plugin-gmail/issues",
-  "release_notes_url": "https://github.com/abdulsmapara/mattermost-plugin-gmail/blob/master/CHANGELOG.md",
+  "id": "workchat-plugin-gmail",
+  "name": "Workchat Gmail Bot",
+  "description": "Gmail Integration for Workchat",
+  "homepage_url": "https://gitlab.com/w1572/workchat-plugin-gmail/blob/master/README.md",
+  "support_url": "https://gitlab.com/w1572/workchat-plugin-gmail/issues",
+  "release_notes_url": "https://gitlab.com/w1572/workchat-plugin-gmail/blob/master/CHANGELOG.md",
   "version": "0.1.1",
   "min_server_version": "5.19.0",
   "server": {
@@ -29,8 +29,8 @@ const manifestStr = `
     "executable": ""
   },
   "settings_schema": {
-    "header": "The Gmail plugin for Mattermost",
-    "footer": "Made with Love and Support from Mattermost by Abdul Sattar Mapara",
+    "header": "The Gmail plugin for Workchat",
+    "footer": "Made with Love and Support from Workchat by Abdul Sattar Mapara",
     "settings": [
       {
         "key": "GmailOAuthClientID",

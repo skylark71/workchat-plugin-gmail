@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
-	"google.golang.org/api/gmail/v1"
 	"strings"
+
+	"gitlab.com/w1572/backend/model"
+	"gitlab.com/w1572/backend/plugin"
+	"google.golang.org/api/gmail/v1"
 )
 
 // ExecuteCommand executes the commands registered on getCommand() via RegisterCommand hook
@@ -64,7 +65,7 @@ func (p *Plugin) handleConnectCommand(c *plugin.Context, args *model.CommandArgs
 	}
 
 	// Send an ephemeral post with the link to connect gmail
-	p.sendMessageFromBot(args.ChannelId, args.UserId, true, fmt.Sprintf("[Click here to connect your Gmail account with Mattermost.](%s/plugins/%s/oauth/connect)", *siteURL, manifest.Id))
+	p.sendMessageFromBot(args.ChannelId, args.UserId, true, fmt.Sprintf("[Click here to connect your Gmail account with Workchat.](%s/plugins/%s/oauth/connect)", *siteURL, manifest.Id))
 
 	return &model.CommandResponse{}, nil
 }
@@ -112,8 +113,8 @@ func (p *Plugin) handleDisconnectCommand(c *plugin.Context, args *model.CommandA
 
 	deleteMessageAttachment := &model.SlackAttachment{
 		Title: "Disconnect Gmail plugin",
-		Text: ":scissors: Are you sure you would like to disconnect Gmail from Mattermost?\n" +
-			"If you have any question or concerns please [report](https://github.com/abdulsmapara/mattermost-plugin-gmail/issues/new)",
+		Text: ":scissors: Are you sure you would like to disconnect Gmail from Workchat?\n" +
+			"If you have any question or concerns please [report](https://gitlab.com/w1572/workchat-plugin-gmail/issues/new)",
 		Actions: []*model.PostAction{deleteButton, cancelButton},
 	}
 

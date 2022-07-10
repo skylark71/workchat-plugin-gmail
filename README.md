@@ -1,11 +1,4 @@
-# Mattermost Gmail Plugin
-**A Gmail plugin for [Mattermost](https://mattermost.com) - Brings your gmail conversations within Mattermost**
-
-**Developer:** [Abdul Sattar Mapara](https://github.com/abdulsmapara)
-
-![Mattermost-Gmail-Plugin-Usage-Overview](https://github.com/abdulsmapara/Github-Media/blob/master/Gmail-Plugin/gmail-usage-overview.png)
-
-_(The name(s) used are ficticious and for demonstration purpose)_
+# Workchat Gmail Plugin
 
 ## Table of content
 - [About the plugin](#about-the-plugin)
@@ -25,10 +18,10 @@ _(The name(s) used are ficticious and for demonstration purpose)_
 - [Acknowledgments](#acknowledgments)
 
 ## About the plugin
-The plugin connects your Gmail with Mattermost, that enables you to import Gmail messages and threads (along with attachments) to any Mattermost channel. Also, you can subscribe to get notifications on new emails. Explore the plugin and report issues, if any, to [Issues-Section](https://github.com/abdulsmapara/mattermost-plugin-gmail/issues).
+The plugin connects your Gmail with Workchat, that enables you to import Gmail messages and threads (along with attachments) to any Workchat channel. Also, you can subscribe to get notifications on new emails. Explore the plugin and report issues.
 
 ## Installation
-1. Download the latest version of the [release](https://github.com/abdulsmapara/mattermost-plugin-gmail/releases) directory. Go to `System Console` and upload the latest release in the Plugin Management section. For help on how to install a custom plugin, please refer [installing custom plugin docs](https://docs.mattermost.com/administration/plugins.html#custom-plugins).
+1. Download the latest version of the [release](https://gitlab.com/w1572/workchat-plugin-gmail/releases) directory. Go to `System Console` and upload the latest release in the Plugin Management section. For help on how to install a custom plugin.
 
 1. Next, you will need to enter Client Secret, Client ID, Topic Name and generate Encryption Key to enable the plugin successfully. You will also need to create a Pub/Sub Subscription for the plugin to function properly -
 
@@ -37,29 +30,29 @@ The plugin connects your Gmail with Mattermost, that enables you to import Gmail
 		* After creating a project click on `Go to APIs overview` on `APIs` card from the dashboard which will take you to the API dashboard.
 		* From the left menu, select `OAuth consent screen` (This page configures the consent screen for all applications in the created project)
 		* Select `Internal` (In this mode, the app is limited to G Suite users within a organization) or `External` (In this mode, the app is available to any user with a Google account)
-		* Type the Application Name (eg. Mattermost Gmail Plugin), upload the Application logo, select a support mail.
+		* Type the Application Name (eg. Workchat Gmail Plugin), upload the Application logo, select a support mail.
 		* Next, Click on `Add Scope` and add the scope `https://mail.google.com/`. If you cannot view this scope, click on `enabled APIs` link in the header (opens in new tab), select `Enable APIs and Services`, search for (and select) `Gmail API` and then click `Enable API`. Now, you should see the required scope.
 		* Click on `Save` and select `Credentials` from the left menu
 		* Click on `Create Credentials` and select `OAuth client ID` from the dropdown
 		* Select the Application type as `Web Application`
 		* Enter the name of the OAuth 2.0 client (not shown to end users)
-		* Enter the values of `Authorized Javascript Origins` as `<Mattermost server URL>` and the value of `Authorised redirect URIs` as `<Mattermost server URL>/plugins/mattermost-plugin-gmail/oauth/complete` and then click on `Create`.
+		* Enter the values of `Authorized Javascript Origins` as `<Workchat server URL>` and the value of `Authorised redirect URIs` as `<Workchat server URL>/plugins/workchat-plugin-gmail/oauth/complete` and then click on `Create`.
 		* Copy the Client ID and Client Secret and enter these in the Plugin Configuration Settings.
 
 	2. To obtain the topic name -
 		* Open the navigation menu (by clicking on Hamburger icon), scroll down and find `Pub/Sub` in the `Big Data` section. Select `Topics` from the menu obtained on hovering over the `Pub/Sub` title.
-		* Create a Topic by entering a `Topic ID` (eg. mattermost-gmail-plugin-topic) and selecting a suitable option for `Encryption` (If you select, `Customer-managed key`, you may need to configure a little to proceed).
+		* Create a Topic by entering a `Topic ID` (eg. workchat-gmail-plugin-topic) and selecting a suitable option for `Encryption` (If you select, `Customer-managed key`, you may need to configure a little to proceed).
 		* Select `Add Member` from the Permissions Section present on the right.
 		* Enter `gmail-api-push@system.gserviceaccount.com` in the `New members` field.
 		* Select the role as `Pub/Sub Publisher` from `Pub/Sub` in the dropdown and click on `Save`.
-		* You can now copy the displayed `Topic Name` and enter in the Plugin Configuration Settings (eg. `projects/mattermost-project-111111/topics/mattermost-gmail-plugin-topic`).
+		* You can now copy the displayed `Topic Name` and enter in the Plugin Configuration Settings (eg. `projects/workchat-project-111111/topics/workchat-gmail-plugin-topic`).
 
 	3. Create a subscription -
 		* Select `Subscriptions` from the left menu and click on `Create Subscription`
-		* Provide a `Subscription ID` (eg. `mattermost-plugin-gmail-subscription`)
+		* Provide a `Subscription ID` (eg. `workchat-plugin-gmail-subscription`)
 		* Select the Topic just created by following the above steps
 		* Select the `Delivery Type` as `Push`
-		* Enter the `Endpoint URL` as `<Mattermost-Server-URL>/plugins/mattermost-plugin-gmail/webhook/gmail` (_Currently, do not check the `Enable Authentication` option._)
+		* Enter the `Endpoint URL` as `<Workchat-Server-URL>/plugins/workchat-plugin-gmail/webhook/gmail` (_Currently, do not check the `Enable Authentication` option._)
 		* Choose `Never Expire` for `Subscription expiration`
 		* Set `Acknowledgement deadline` to anything between `10 seconds` to `600 seconds`
 		* You can let other fields being set to default values or configure them if you wish
@@ -72,15 +65,15 @@ The plugin connects your Gmail with Mattermost, that enables you to import Gmail
 
 ## Connecting with Gmail
 
-1. Head over to any Mattermost channel, and type the slash command - `/gmail connect`. The Gmail Bot will post a link, through which you can connect your Gmail Account.
+1. Head over to any Workchat channel, and type the slash command - `/gmail connect`. The Gmail Bot will post a link, through which you can connect your Gmail Account.
 
 2. Click on the link, and select the Gmail Account that you wish to connect.
 
 3. You then need to grant certain permissions to proceed.
 
-4. Once you grant the permissions, you will be redirected to a Successfully authenticated page, which you can close and head back to the Mattermost Application.
+4. Once you grant the permissions, you will be redirected to a Successfully authenticated page, which you can close and head back to the Workchat Application.
 
-5. A new direct message from the Gmail Bot is also posted stating the same. With this your Gmail account is successfully connected to Mattermost.
+5. A new direct message from the Gmail Bot is also posted stating the same. With this your Gmail account is successfully connected to Workchat.
 
 ## Usage
 
@@ -90,7 +83,7 @@ The plugin connects your Gmail with Mattermost, that enables you to import Gmail
 
 `/gmail connect` 
 
-* Posts a link to connect Gmail with your Mattermost account
+* Posts a link to connect Gmail with your Workchat account
 
 * Demonstration:
 ![gmail-connect-demo](https://github.com/abdulsmapara/Github-Media/blob/master/Gmail-Plugin/connect-demo.gif)
@@ -101,7 +94,7 @@ _(Note that the prompt asking for permissions to access Gmail is not shown in th
 
 `/gmail import mail <Message-ID>` 
 
-* This command lets you import a Gmail message in any Mattermost channel using its ID (along with its attachments, if any). 
+* This command lets you import a Gmail message in any Workchat channel using its ID (along with its attachments, if any). 
 
 * To obtain the message ID, click on the three dots present in the Gmail message and select `Show Original`. Message ID will be displayed at the start of the new page.
 
@@ -112,7 +105,7 @@ _(Note that the prompt asking for permissions to access Gmail is not shown in th
 
 `/gmail import thread <Message-ID>` 
 
-* This command lets you import a complete Gmail conversation in any Mattermost channel using ID of any message in the thread.
+* This command lets you import a complete Gmail conversation in any Workchat channel using ID of any message in the thread.
 
 * Demonstration:
 ![gmail-import-thread-demo](https://github.com/abdulsmapara/Github-Media/blob/master/Gmail-Plugin/import-thread-demo.gif)
@@ -145,7 +138,7 @@ _(Note that the prompt asking for permissions to access Gmail is not shown in th
 
 `/gmail disconnect`
 	
-* This command deletes the information required to access your Gmail account from Mattermost.
+* This command deletes the information required to access your Gmail account from Workchat.
 
 * Additionally, you may head over to `Manage your Google Account`, select `Security Issues` and remove access to the project corresponding to this plugin.
 
@@ -169,9 +162,9 @@ _(Note that the prompt asking for permissions to access Gmail is not shown in th
 
 3. Use `make test` to test the plugin.
 
-4. Use `make dist` to build distributions of the plugin that can be uploaded to a Mattermost server
+4. Use `make dist` to build distributions of the plugin that can be uploaded to a Workchat server
 
-5. Alternatively, use `make` to check the style, test and build distributions of the plugin that you can upload to a Mattermost server (all at once).
+5. Alternatively, use `make` to check the style, test and build distributions of the plugin that you can upload to a Workchat server (all at once).
 
 6. Use `make deploy` to deploy the plugin to your local server. Before running `make deploy`, you need to set a few environment variables:
 	```
@@ -184,10 +177,9 @@ _(Note that the prompt asking for permissions to access Gmail is not shown in th
 	
 	1. On the server, in the file `config/config.json`, change `EnableUploads` in the `Plugin Settings` to `true`
 
-	1. Login to Mattermost server with admin privileges.
+	1. Login to Workchat server with admin privileges.
 
 	1. Headover to `System Console` and upload the tar.gz file created in `dist/` directory to the plugins section.
-	For help on how to install a custom plugin, please refer [installing custom plugin docs](https://docs.mattermost.com/administration/plugins.html#custom-plugins).
 
 	1. Follow instructions (2. onwards) at [Installation-Guide](#installation)
 	
@@ -198,8 +190,4 @@ _(Note that the prompt asking for permissions to access Gmail is not shown in th
 - [ ] Log errors that are ignored and are important
 - [ ] While connecting with Gmail, only ask users for the permissions required for using the plugin and not any additional permissions
 - [ ] Authenticate incoming webhook from Gmail that is used to send mail notifications to users on subscription (Enforce JWT authentication for incoming webhooks)
-- [ ] Add the ability to send mails from Mattermost to a desired Gmail account
-
-## Acknowledgments
-- Mattermost Team and Community
-- [Mattermost Google Calendar Plugin](https://github.com/mattermost/mattermost-plugin-google-calendar) for motivation
+- [ ] Add the ability to send mails from Workchat to a desired Gmail account

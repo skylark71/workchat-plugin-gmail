@@ -1,17 +1,18 @@
 package main
 
 import (
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"path/filepath"
 	"sync"
+
+	"github.com/pkg/errors"
+	"gitlab.com/w1572/backend/model"
+	"gitlab.com/w1572/backend/plugin"
 )
 
-// Plugin implements the interface expected by the Mattermost server to communicate between the server and plugin processes.
+// Plugin implements the interface expected by the Workchat server to communicate between the server and plugin processes.
 type Plugin struct {
-	plugin.MattermostPlugin
+	plugin.WorkchatPlugin
 
 	// UserID of gmail bot
 	gmailBotID string
@@ -26,7 +27,7 @@ type Plugin struct {
 
 // OnActivate is invoked when the plugin is activated. If an error is returned, the plugin will be terminated.
 // The plugin will not receive hooks until after OnActivate returns without error.
-// https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.OnActivate
+// https://developers.workchat.com/extend/plugins/server/reference/#Hooks.OnActivate
 func (p *Plugin) OnActivate() error {
 	// Retrieves the active configuration under lock.
 	config := p.getConfiguration()
@@ -53,7 +54,7 @@ func (p *Plugin) OnActivate() error {
 	gmailBot := &model.Bot{
 		Username:    "gmail",
 		DisplayName: "Gmail Bot",
-		Description: "Created by Mattermost Gmail Plugin.",
+		Description: "Created by Workchat Gmail Plugin.",
 	}
 
 	// Ensure the bot. If not present create Gmail bot

@@ -7,10 +7,10 @@ const (
 
 // specific to plugin sub-commands
 const (
-	helpTextHeader = "###### Mattermost Gmail Plugin - Slash Command Help\n"
+	helpTextHeader = "###### Workchat Gmail Plugin - Slash Command Help\n"
 
-	commonHelpText = "\n* `/gmail connect` - Connect your Mattermost account to your Gmail account\n" +
-		"* `/gmail disconnect` - Disconnect Gmail from Mattermost\n" +
+	commonHelpText = "\n* `/gmail connect` - Connect your Workchat account to your Gmail account\n" +
+		"* `/gmail disconnect` - Disconnect Gmail from Workchat\n" +
 		"* `/gmail import mail <message-id>` - Import a mail/message from Gmail using message ID.\n\nNote: To get ID of any mail, click on the 3 dots after opening the mail, and then select 'Show Original'. You will see the Message ID at the top in a new tab\n" +
 		"* `/gmail import thread <thread-message-id>` - Import a complete Gmail thread (conversation) using ID of any mail in the thread\n" +
 		"* `/gmail subscribe <optional-label-ids>` - Subscribe to get notifications from the Gmail Bot for the labels mentioned. Mention the label IDs in comma-separated fashion from the list: INBOX, CATEGORY_PERSONAL, CATEGORY_SOCIAL, CATEGORY_PROMOTIONS, CATEGORY_UPDATES, CATEGORY_FORUMS. The default label is INBOX.\n" +

@@ -5,19 +5,20 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
-	"golang.org/x/oauth2"
-	"google.golang.org/api/gmail/v1"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"gitlab.com/w1572/backend/model"
+	"gitlab.com/w1572/backend/plugin"
+	"golang.org/x/oauth2"
+	"google.golang.org/api/gmail/v1"
 )
 
 // ServeHTTP allows the plugin to implement the http.Handler interface. Requests destined for the
 // /plugins/{id} path will be routed to the plugin.
 //
-// The Mattermost-User-Id header will be present if (and only if) the request is by an
+// The Workchat-User-Id header will be present if (and only if) the request is by an
 // authenticated user.
 func (p *Plugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -36,7 +37,7 @@ func (p *Plugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Req
 }
 
 func (p *Plugin) connectGmail(w http.ResponseWriter, r *http.Request) {
-	authedUserID := r.Header.Get("Mattermost-User-ID")
+	authedUserID := r.Header.Get("Workchat-User-ID")
 
 	// Unauthorized user
 	if authedUserID == "" {
@@ -71,13 +72,13 @@ func (p *Plugin) completeGmailConnection(w http.ResponseWriter, r *http.Request)
 			</script>
 		</head>
 		<body>
-			<p>Completed connecting to Gmail successfully. Please close this window and head back to the Mattermost application.</p>
+			<p>Completed connecting to Gmail successfully. Please close this window and head back to the Workchat application.</p>
 		</body>
 	</html>
 	`
 
-	// Check if we were redirected from Mattermost pages
-	authUserID := r.Header.Get("Mattermost-User-ID")
+	// Check if we were redirected from Workchat pages
+	authUserID := r.Header.Get("Workchat-User-ID")
 	if authUserID == "" {
 		http.Error(w, "Not authorized", http.StatusUnauthorized)
 		return
@@ -141,8 +142,8 @@ func (p *Plugin) completeGmailConnection(w http.ResponseWriter, r *http.Request)
 	p.API.LogInfo("Onboarding completed successfully for user with user ID: " + userID)
 
 	// Post intro post
-	message := "#### Welcome to the Mattermost Gmail Plugin!\n" +
-		"You've successfully connected your Mattermost account to your Gmail.\n" +
+	message := "#### Welcome to the Workchat Gmail Plugin!\n" +
+		"You've successfully connected your Workchat account to your Gmail.\n" +
 		"Please type `/gmail help` to understand how to use this plugin."
 
 	p.CreateBotDMPost(userID, message)
@@ -153,8 +154,8 @@ func (p *Plugin) completeGmailConnection(w http.ResponseWriter, r *http.Request)
 }
 
 func (p *Plugin) disconnectGmail(w http.ResponseWriter, r *http.Request) {
-	// Check if this was passed within Mattermost
-	authUserID := r.Header.Get("Mattermost-User-ID")
+	// Check if this was passed within Workchat
+	authUserID := r.Header.Get("Workchat-User-ID")
 	if authUserID == "" {
 		http.Error(w, "Not authorized", http.StatusUnauthorized)
 		return
@@ -188,7 +189,7 @@ func (p *Plugin) disconnectGmail(w http.ResponseWriter, r *http.Request) {
 			UserId:    p.gmailBotID,
 			ChannelId: channelID,
 			Message: fmt.Sprint(
-				":zzz: You have successfully disconnected your Gmail with Mattermost. You may also perform this steps: Gmail Profile Picture Icon > Manage Your Google Account > Security Issues > Third Party Access > Remove Access by this project.\n" +
+				":zzz: You have successfully disconnected your Gmail with Workchat. You may also perform this steps: Gmail Profile Picture Icon > Manage Your Google Account > Security Issues > Third Party Access > Remove Access by this project.\n" +
 					"If you ever want to connect again, just use `/gmail connect`"),
 		})
 		return

@@ -3,7 +3,7 @@
 ##### v0.1.1
 
 - Persisting state and user information after plugin restarts
-- A gmail ID can now be connected to by multiple Mattermost users. However, one Mattermost user can be connected to only one gmail ID at a time
+- A gmail ID can now be connected to by multiple Workchat users. However, one Workchat user can be connected to only one gmail ID at a time
 - New sub-command: `subscriptions` to display labels currently subscribed by the user
 - Minor changes to display statements and fixed behaviour of disconnect command
 
